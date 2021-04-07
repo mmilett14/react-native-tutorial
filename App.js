@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, TextInput, View} from 'react-native';
 
-const Cat = (props) => {
-  const [isHungry, setIsHungry] = useState(true);
-
+const PizzaTranslator = () => {
+  const [text, setText] = useState('');
   return (
-    <View>
-      <Text>
-        I am {props.name}, and I am {isHungry ? "hungry" : "full"}!
+    <View style={{padding: 10}}>
+      <TextInput
+        style={{height: 40}}
+        placeholder="Type here to translate!"
+        onChangeText={text => setText(text)}
+        defaultValue={text}
+      />
+      <Text style={{padding: 10, fontsize: 42}}>
+        {text.split(' ').map((word) => word && '🍕').join(' ')}
       </Text>
-      <Button
-        onPress={() => {
-          setIsHungry(false);
-        }}
-        disabled={!isHungry}
-        title={isHungry ? "Pour me some milk, please!" : "Thank you!"}
-        />
     </View>
   );
 }
 
-const Cafe = () => {
-  return (
-    <>
-      <Cat name = "Meaya" />
-      <Cat name = "Lucy" />
-    </>
-  );
-}
-
-export default Cafe;
+export default PizzaTranslator
